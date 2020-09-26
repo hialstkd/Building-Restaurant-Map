@@ -4,10 +4,10 @@
 Building an interface that allows users to see the top 10 restaurants in a city of their choosing using Yelp API, HTML, CSS, JS, and the Algolia Places JS library.
 
 ### Team Members: 
-* Drew Gilmore
-* Sagar Patel
-* Tony Min Sang Yoo
-* Minerva Banuelos
+* Drew Gilmore (@drewpgilmore)
+* Sagar Patel (@Autonomousse)
+* Tony Min Sang Yoo (@hialstkd)
+* Minerva Banuelos (@minerva-b)
 
 ### Sources:
 * [Yelp Data](https://www.yelp.com/dataset/)
