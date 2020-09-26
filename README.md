@@ -3,7 +3,7 @@
 ## Topic: 
 Building an interface that allows users to see the top 10 restaurants in a city of their choosing using Yelp API, HTML, CSS, JS, and the Algolia Places JS library.
 
-## Articulation: 
+## Articulation :pizza: vs. :taco:
 
 We remembered the original question posed to us at the beginning of this bootcamp and thought to expand on it. Are Italian or Mexican restaurants more popular in the U.S.? We came up with using the Yelp dataset to create a simpler version of Yelp’s GUI that limits what is shown to the top 10 restaurants based on the city the user is in. A lot of data suggests that when users are presented with too many options, they tend to give up and not choose anything. But when presented with a few options, they are able to/more likely decide on an item and follow through with purchasing it.
 
