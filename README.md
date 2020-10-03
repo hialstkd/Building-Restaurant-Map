@@ -1,7 +1,7 @@
 # Project 2
 
 ## Topic: 
-Building an interface that allows users to see the top 10 restaurants in a city of their choosing using Yelp API, HTML, CSS, JS, and the Algolia Places JS library.
+Building an interface that allows users to see the restaurants that are still operating during the COVID-19 pandemic in a city of their choosing using Yelp API, HTML, CSS, JS, Algolia Places JS library. MongoDB, and Python-Flask.
 
 ## Articulation :pizza: vs. :taco:
 
