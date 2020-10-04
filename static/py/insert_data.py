@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 
 # Read in the file location and turn it into a pandas dataframe
+# Change the path to where you have the data stored as it's too large to upload to github
 business_file = "../../Yelp/yelp_academic_dataset_business.json"
 business_pd = pd.read_json(business_file, lines=True)
 
@@ -57,6 +58,9 @@ client = pymongo.MongoClient(conn)
 # Select database and collection to use
 db = client.restaurants
 data = db.data
+
+# Save the file to a csv so we can upload it to the github repo, remove the index when saving
+cleaned.to_csv("../data/cleaned_data.csv", index=False)
 
 # Run a loop through the length of the dataframe
 # Create table and append values for each business
