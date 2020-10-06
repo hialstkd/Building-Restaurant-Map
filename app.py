@@ -25,6 +25,10 @@ mongo = PyMongo(app)
 # data = mongo.db.data.find_one()
 # print(data)
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 @app.route('/data', methods = ['GET'])
 def data():
     yelp_data = list(mongo.db.data.find({}, {'_id': False}).limit(5))
