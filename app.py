@@ -21,6 +21,14 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/restaurants"
 mongo = PyMongo(app)
 
 
+#mongo = PyMongo(app, uri="mongodb://localhost:27017/restaurants")
+# data = mongo.db.data.find_one()
+# print(data)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 @app.route('/data', methods = ['GET'])
 def data():
     yelp_data = list(mongo.db.data.find({}, {'_id': False}).limit(5))
