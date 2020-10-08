@@ -4,17 +4,14 @@ var url = "/data";
 // Pull in and read the json formatted data using d3
 d3.json(url, function (data) {
 
-    // Use d3 to select the ID for where the search button is located
-    var selection = d3.select("#search-button");
+    // Create a variable that selects where the search type (type of food in this case) populates in the Search bar
+    var selection = d3.select("#inputGroupSelect04");
 
     // When the user clicks on the Search button, call the updateChart function to update the bar chart
-    var search = selection.on("click", updateChart);
-
-    // Create a variable that selects where the search type (type of food in this case) populates in the Search bar
-    var foodType = d3.select("#inputGroupSelect04");
+    var search = selection.on("change", updateChart);
 
     // Create a variable that stores the value of the selected food type (American, Mexican, Italian, etc)
-    var value = foodType.property("value");
+    var value = selection.property("value");
 
     // If the value of the food type is not "Choose a category...", then call the updateChart function
     if (value != "Choose a category...") {
@@ -37,11 +34,20 @@ d3.json(url, function (data) {
             datasets: [{
                 label: 'Number of Restaurants: ',
                 data: starCount,
-                borderColor: 'rgba(75, 192, 192, 1)',
+                borderColor: 'rgba(39, 99, 99, 1)',
+                borderWidth: 2,
                 backgroundColor: 'rgba(75, 192, 192, 0.75)',
             }]
         },
         options: {
+            title: {
+                display: true,
+                text: `Number of Restaurants in each Star Rating Category`,
+                fontSize: 16
+            },
+            legend: {
+                display: false
+            },
             scales: {
                 yAxes: [{
                     ticks: {
@@ -96,7 +102,15 @@ d3.json(url, function (data) {
         myChart.data.datasets.forEach((dataset) => {
             dataset.data = starCount;
         });
-        console.log(myChart.data.datasets);
+        // Check if the selection is the default, if it is then the title should be the default text
+        if (value == "Choose a category...") {
+            myChart.options.title.text = `Number of Restaurants in each Star Rating Category`;
+        }
+        // If the selection is a food type, it should display the title with the food type
+        else {
+            myChart.options.title.text = `Number of ${value} Restaurants in each Star Rating Category`;
+        }
+        // Update the chart
         myChart.update();
-    }
-})
+    };
+});
