@@ -1,20 +1,22 @@
 .jumbotron {
-    height: 280px;
+    height: 175px;
     margin: 20px 50px 20px 50px;
     padding: 10px 10px 10px 10px;
-}
-
-.display-4 {
     text-align: center;
-    font-weight: bold;
+    vertical-align: center;
 }
 
-.lead { text-align: center; }
-#github-link { text-align: center; }
+.display-4 { font-weight: bold; }
+#github-link { font-weight: light;}
 
 
+.input-group { 
+    width: 800px;
+    align-content: center;
+}
 
-#viz-row {
+
+#viz-row, #input-row {
     margin: 20px 50px 20px 50px;
 }
 
@@ -22,7 +24,6 @@
 .col-md-4 {
     height: 500px;
     border: 2px dashed red;
-
 }
 
 
