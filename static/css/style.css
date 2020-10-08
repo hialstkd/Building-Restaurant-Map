@@ -1,27 +1,2 @@
-.container {
-    position: relative;
-    margin: auto;
-}
 
-.jumbotron {
-    margin: 20px 120px 20px 120px;
-    padding: 30px;
-    font-size: smaller;
-}
-
-
-#viz-row {
-    margin: 0px 120px 0px 120px;
-    padding: 0px;
-}
-
-#viz-row 
-.col-md-4 {
-    border: 1px dashed red;
-    padding: 10px;
-}
-
-#github-link {
-    align-content: flex-end;
-}
 
