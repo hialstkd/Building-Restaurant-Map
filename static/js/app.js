@@ -26,7 +26,7 @@ d3.json(url, function (data) {
     var starCount = [0, 0, 0, 0, 0, 0];
 
     // Create the chart, set the type, insert the labels and starting data, change the color of the bars, begin the axis at 0
-    var ctx = document.getElementById("Chart").getContext('2d');
+    var ctx = document.getElementById("Bar").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -109,8 +109,173 @@ d3.json(url, function (data) {
         // If the selection is a food type, it should display the title with the food type
         else {
             myChart.options.title.text = `Number of ${value} Restaurants in each Star Rating Category`;
+        };
+
+        // Change the color of the bar chart to match the doughnut chart
+        if (value == "American") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(60, 149, 179, 1)';
+                dataset.backgroundColor = 'rgba(60, 149, 179, .65)';
+            });
         }
+        else if (value === "Mexican") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(72, 108, 194, 1)';
+                dataset.backgroundColor = 'rgba(72, 108, 194, .65)';
+            });
+        }
+        else if (value == "Italian") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(129, 95, 202, 1)';
+                dataset.backgroundColor = 'rgba(129, 95, 202, .65)';
+            });
+        }
+        else if (value == "Chinese") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(156, 114, 126, 1)';
+                dataset.backgroundColor = 'rgba(156, 114, 126, .65)';
+            });
+        }
+        else if (value == "Japanese") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(255, 138, 169, 1)';
+                dataset.backgroundColor = 'rgba(255, 138, 169, .65)';
+            });
+        }
+        else if (value == "Thai") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(224, 13, 56, 1)';
+                dataset.backgroundColor = 'rgba(224, 13, 56, .65)';
+            });
+        }
+        else if (value == "Mediterranean") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(150, 149, 150, 1)';
+                dataset.backgroundColor = 'rgba(150, 149, 150, .65)';
+            });
+        }
+        else if (value == "Korean") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(163, 18, 108, 1)';
+                dataset.backgroundColor = 'rgba(163, 18, 108, .65)';
+            });
+        }
+        else if (value == "Filipino") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(24, 44, 71, 1)';
+                dataset.backgroundColor = 'rgba(24, 44, 71, .65)';
+            });
+        }
+        else if (value == "French") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(119, 208, 237, 1)';
+                dataset.backgroundColor = 'rgba(119, 208, 237, .65)';
+            });
+        }
+        else if (value == "Indian") {
+            myChart.data.datasets.forEach((dataset) => {
+                dataset.borderColor = 'rgba(61, 183, 154, 1)';
+                dataset.backgroundColor = 'rgba(61, 183, 154, .65)';
+            });
+        };
+
         // Update the chart
         myChart.update();
     };
+
+    // This array holds the value of each kind of food type there is a choice for
+    var food_type = ["American", "Chinese", "Italian", "Mexican", "Japanese", "Thai", "Filipino", "Indian", "Korean", "French", "Mediterranean"];
+
+    // This array creates a place holder for each food type for the doughnut chart
+    var restaurant_count = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    // Loop through the data, check if the data has the food_type category, if it does then add 1 to the counter for the 
+    // food_type index in restaurant_count to count the number of restaurants in each category
+    for (var x = 0; x < data.length; x++) {
+        for (var y = 0; y < food_type.length; y++) {
+
+            if (data[x]["categories"].includes(food_type[y])) {
+
+                restaurant_count[y] += 1;
+            }
+        }
+    };
+
+    // This array will be used to create an object that contains the type and count of each kind of restaurant
+    to_sort = [];
+
+    // These arrays will be used to hold the sorted arrays in descending order
+    num_restaurants = [];
+    type_restaurants = [];
+
+    // Create an object that holds the food type and counter in the same order they currently are
+    for (var x = 0; x < restaurant_count.length; x++) {
+        to_sort.push({'name': food_type[x], 'count': restaurant_count[x]})
+    }
+
+    // Sort the collection of objects.
+    // If a is less than b, move it down one index, if a is equal to b, do nothing, else if a is greater than b, a moves up an index
+    to_sort.sort(function(a, b) {
+        return ((a.count < b.count) ? 1 : ((a.count == b.count) ? 0 : -1));
+    });
+
+    // Create arrays with the count of each restaurant type and the type of food now that it is sorted in descending order
+    // These arrays will be used to create the doughnut chart so it is in descending fashion and not mixed up
+    to_sort.forEach((key, value) => num_restaurants.push(to_sort[value]["count"]))
+    to_sort.forEach((key, value) => type_restaurants.push(to_sort[value]["name"]))
+
+    // And for a doughnut chart
+    var cty = document.getElementById("Doughnut").getContext('2d');
+    var myDoughnutChart = new Chart(cty, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                label: '# of Restaurants',
+                data: num_restaurants,
+                backgroundColor: [
+                    'rgba(60, 149, 179, .65)',
+                    'rgba(72, 108, 194, .65)',
+                    'rgba(129, 95, 202, .65)',
+                    'rgba(156, 114, 126, .65)',
+                    'rgba(255, 138, 169, .65)',
+                    'rgba(224, 13, 56, .65)',
+                    'rgba(150, 149, 150, .65)',
+                    'rgba(163, 18, 108, .65)',
+                    'rgba(24, 44, 71, .65)',
+                    'rgba(119, 208, 237, .65)',
+                    'rgba(61, 183, 154, .65)',
+                ],
+                borderColor: [
+                    'rgba(60, 149, 179, 1)',
+                    'rgba(72, 108, 194, 1)',
+                    'rgba(129, 95, 202, 1)',
+                    'rgba(156, 114, 126, 1)',
+                    'rgba(255, 138, 169, 1)',
+                    'rgba(224, 13, 56, 1)',
+                    'rgba(150, 149, 150, 1)',
+                    'rgba(163, 18, 108, 1)',
+                    'rgba(24, 44, 71, 1)',
+                    'rgba(119, 208, 237, 1)',
+                    'rgba(61, 183, 154, 1)',
+
+                ],
+                borderWidth: 2
+            }],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: type_restaurants
+        },
+        options: {
+            title: {
+                display: true,
+                text: `Number of Total Restaurants by Type`,
+                fontSize: 20
+            },
+            legend: {
+                labels: {
+                    fontSize: 16
+                }
+            }
+        }
+    });
 });
