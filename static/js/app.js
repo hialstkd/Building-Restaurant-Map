@@ -204,7 +204,7 @@ d3.json(url, function (data) {
         }
         // If the selection is a food type, it should display the title with the food type
         else {
-            // Run a loop to get the display name
+            // Run a loop to get the total number of restaurants to add in the title of the bar chart
             for (var z = 0; z < to_sort.length; z++) {
                 if (to_sort[z]["name"] == value) {
                     var display_num = to_sort[z]["count"]
