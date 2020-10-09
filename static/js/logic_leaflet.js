@@ -86,9 +86,10 @@ var yelpData = "/data";
 
 // Updating the map upon dropdown selection
 // ----------------------------------------------
-d3.selectAll("#inputGroupSelect04").on("change", updateMap);
+d3.select("#inputGroupSelect04").on("change");
+// , updateMap
 
-function updateMap(category) {
+// function updateMap() {
 
     d3.json(yelpData, function (data) {
 
@@ -101,8 +102,7 @@ function updateMap(category) {
 
         // For loop, to data info to later use for circles and binding pop-ups
         // Not a geojson file therefore create an empty list to store the lat, lng
-        var lat = [];
-        var lng = [];
+        var coords = [];
 
         for (var i = 0; i < data.length; i++) {
             var categories = data[i].categories;
@@ -115,36 +115,26 @@ function updateMap(category) {
             var reviews = data[i].review_count;
             // var lat = data[i].latitude;
             // var lng = data[i].longitude;
+            coords.push([data[i].latitude, data[i].longitude])
 
-            lat.push(data[i].latitude)
-            lng.push(data[i].longitude)
+            // If statement, to search and create pop-ups dependent on dropdownMenu selection
+            if (categories.includes(category)) {
 
-            // console.log(lat)
-            // console.log(lng)
+                var newMarker = L.marker([lat, lng], {
+                    fillOpacity: 0.8,
+                    color: 'red',
+                    fillColor: 'red'
+                }).addTo(myMap);
 
-
-            // // Gathering the coord (coordinates)
-            // //
-
-            // // If statement, to search and create pop-ups dependent on dropdownMenu selection
-            // if (categories.includes(category)) {
-
-            //     var newMarker = L.marker([lat, lng], {
-            //         fillOpacity: 0.8,
-            //         color: 'red',
-            //         fillColor: 'red'
-            //     }).addTo(myMap);
-
-            //     newMarker.bindPopup("<h4><b>Place: " + businessName + "<br></b>" +
-            //         "Address: " + address + " " + city + " " + state + " " + zipCode + "</h4><br>" +
-            //         "<p>Categories: " + categories + "<br>" +
-            //         "No. Reviews: " + reviews + "<br>" +
-            //         "Star Rating: " + ratings + "</p>")
-            // }
+                newMarker.bindPopup("<h4><b>Place: " + businessName + "<br></b>" +
+                    "Address: " + address + " " + city + " " + state + " " + zipCode + "</h4><br>" +
+                    "<p>Categories: " + categories + "<br>" +
+                    "No. Reviews: " + reviews + "<br>" +
+                    "Star Rating: " + ratings + "</p>")
+            }
         }
 
-        console.log(lat)
-        console.log(lng)
+        console.log(coords)
         console.log(data.length)
     })
-};
+// };
