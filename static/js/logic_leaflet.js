@@ -54,7 +54,7 @@ d3.json(yelpData, function (data) {
     var circles = L.layerGroup();
 
     // Creating map object
-    var myMap = L.map("viz-2", {
+    var myMap = L.map("viz-1", {
         center: [36.1699, -115.1398],
         zoom: 10,
         layers: [lightmap, circles]
