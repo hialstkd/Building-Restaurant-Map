@@ -31,7 +31,7 @@ def home():
 
 @app.route('/data', methods = ['GET'])
 def data():
-    yelp_data = list(mongo.db.data.find({}, {'_id': False}).limit(5))
+    yelp_data = list(mongo.db.data.find({}, {'_id': False}).limit(100))
     return json.dumps(yelp_data, default=json_util.default)
     #return render_template('index.html', data=yelp_data)
 

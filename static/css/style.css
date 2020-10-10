@@ -19,6 +19,7 @@
 .col-md-4 {
     border: 1px dashed red;
     padding: 10px;
+    height: 500px;
 }
 
 #github-link {
