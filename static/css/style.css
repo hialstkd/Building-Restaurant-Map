@@ -20,13 +20,12 @@
 
 .col-md-6 {
   height: 500px;
-  border: 2px dashed red;
-  text-align: center;
+  padding: 0 0 0 0;
 }
 
 canvas {
   padding: 0;
-  margin: auto;
+  /* margin: auto; */
   display: block;
   position: absolute;
   top: 0;

@@ -56,7 +56,7 @@ d3.json(yelpData, function (data) {
     // Creating map object
     var myMap = L.map("viz-5", {
         center: [36.1699, -115.1398],
-        zoom: 10,
+        zoom: 12,
         layers: [lightmap, circles]
     });
 

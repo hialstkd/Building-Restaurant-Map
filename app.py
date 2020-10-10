@@ -13,12 +13,12 @@ def home():
     return render_template('index.html')
 
 @app.route('/map')
-def home():
+def map():
     return render_template('map.html')
 
 @app.route('/data', methods = ['GET'])
 def data():
-    yelp_data = list(mongo.db.data.find({}, {'_id': False}).limit(100))
+    yelp_data = list(mongo.db.data.find({}, {'_id': False}))
     return json.dumps(yelp_data, default=json_util.default)
 
 #-------------------------
