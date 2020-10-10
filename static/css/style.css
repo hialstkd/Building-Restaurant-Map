@@ -25,7 +25,7 @@
 
 canvas {
   padding: 0;
-  margin: auto;
+  /* margin: auto; */
   display: block;
   position: absolute;
   top: 0;
