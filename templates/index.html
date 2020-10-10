@@ -20,8 +20,6 @@
 </head>
 
 <body>
-    
-    
     <div class="container-fluid">
 
         <!--Header Row-->
@@ -54,74 +52,55 @@
         </div>
             
 
-        <!--Viz Row-->
-        <div class="row" id="viz-row">
-            <!--Visual 1-->
-            <div class="col-md-4" id="viz-1">
-                <h2>Visual 1 - Map</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque aliquid minus suscipit amet commodi deserunt, officia tenetur aperiam magni molestiae consectetur asperiores nobis, est vero nam aliquam iusto, porro placeat?</p>
-            </div>
-
-            <!--Visual 2-->
-            <div class="col-md-4" id="viz-2">
-                <h2>Reviews by ZIP Code</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione eveniet officia et aperiam quod ea veniam quae corporis. Facere sunt ad reiciendis earum corrupti asperiores architecto. Odit optio commodi veritatis.</p>
-            </div>
-            <!--Visual 3-->
-            <div class="col-md-4" id="viz-3">
-                <h2>Visual 3 - TBD</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione eveniet officia et aperiam quod ea veniam quae corporis. Facere sunt ad reiciendis earum corrupti asperiores architecto. Odit optio commodi veritatis.</p>
-            </div>
+    <!--Viz Row-->
+    <div class="row" id="viz-row">
+        <!--Visual 1-->
+        <div class="col-md-6" id="viz-1">
+            <h2>Markers Map</h2>
         </div>
-
+        <!--Visual 2-->
+        <div class="col-md-6" id="viz-2">
+            <h2>Reviews by ZIP Code</h2>
+        </div>
+    </div>
+    
+    <!--Viz Row 2-->
+    <div class="row" id="viz-row-2">  
+        <!--Visual 3-->
+        <div class="col-md-6" id="viz-3">
+            <h2>Bar Chart</h2>
+            <canvas id="Chart"></canvas>
+        </div>
+        <!--Visual 4-->
+        <div class="col-md-6" id="viz-4">
+            <h2>Donut Chart Chart</h2>
+        </div>
     </div>
 
-<<<<<<< HEAD
-    <!-- Leaflet JS -->
+    <!--Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
+    
     <!-- D3 JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+    
     <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"
     integrity="sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q=="
     crossorigin="anonymous"></script>
+    
     <!-- API key -->
     <script type="text/javascript" src="../static/js/config.js"></script>
+    
     <!-- Our JavaScript -->
     <script type="text/javascript" src="../static/js/app.js"></script>
+    
     <!--Minerva Choropleth-->
     <script type="text/javascript" src="../static/js/logic_choropleth.js"></script>
+    
     <!--Tony Marker-->
     <script type="text/javascript" src="../static/js/logic_marker.js"></script>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> f9c37ad5535da347ac16fdf3b3ebc19a003adc8b
-=======
-        <!-- Leaflet JS -->
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
-
-        <!-- D3 JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
-
-        <!-- API key -->
-        <script type="text/javascript" src="../static/js/config.js"></script>
-
-        <!-- Our JavaScript -->
-        <script type="text/javascript" src="../static/js/app.js"></script>
-
-        <!--Minerva Leaflet-->
-        <script type="text/javascript" src="../static/js/logic_leaflet.js"></script>
         
-
-
-
-
->>>>>>> minervas_branch
 </body>
 </html>
