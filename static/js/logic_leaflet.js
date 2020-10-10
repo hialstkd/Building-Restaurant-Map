@@ -1,54 +1,77 @@
 // --- Creating the Leaflet Map ---
 
+
+// Defining layers
+var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    tileSize: 512,
+    // maxZoom: 18,
+    zoomOffset: -1,
+    id: "light-v10",
+    accessToken: API_KEY
+});
+
+var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    tileSize: 512,
+    // maxZoom: 18,
+    zoomOffset: -1,
+    id: "dark-v10",
+    accessToken: API_KEY
+});
+
+
 // Step 1: Setting up the size and colors for the circles
 // ------------------------------------------------------
 function markerSize(ratings) {
-    return ratings * 15000
+    return ratings * 250
 }
 
 // Creating the color scale for the ratings
 function getColor(d) {
-    return d >= 5.0 ? '#006400' :
-           d >= 4.0 ? '#228B22' :
-           d >= 3.0 ? '#3CB371' :
-           d >= 2.0 ? '#90EE90' :
-           d >= 1.0 ? '#98FB98' :
-                        'FFA07A';
+    return d >= 5.0 ? '#8B008B' :
+           d >= 4.0 ? '#483D8B' :
+           d >= 3.0 ? '#663399' :
+           d >= 2.0 ? '#6A5ACD' :
+           d >= 1.0 ? '#9370DB' :
+                        '#FFA07A';
 }
 
 
-// Step 2: Creating the map function
+// Step 3: Reading the data using D3
 // ------------------------------------------------------
-function createMap(circles) {
+var yelpData = "/data";
 
-    // Defining layers
-    var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-        attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-        tileSize: 512,
-        maxZoom: 18,
-        zoomOffset: -1,
-        id: "mapbox/streets-v11",
-        accessToken: API_KEY
+d3.json(yelpData, function (data) {
+
+    // Updating the map upon dropdown selection
+    d3.select("#inputGroupSelect04").on("change", createLayer);
+
+    // Dropdown menu selection
+    var dropdownMenu = d3.select("#inputGroupSelect04");
+    var category = dropdownMenu.property("value");
+
+    var circles = L.layerGroup();
+
+    // Creating map object
+    var myMap = L.map("viz-2", {
+        center: [36.1699, -115.1398],
+        zoom: 10,
+        layers: [lightmap, circles]
     });
 
     // Creating a baseMaps object to hold the lightmap layer
     var baseMaps = {
-        "Street Map View": streetmap
+        "Light Map View": lightmap,
+        "Dark Map View": darkmap
     };
 
-    // Creating an overlayMaps object to hold the bikeStations layer
+    // Creating an overlayMaps object to hold the circles layer
     var overlayMaps = {
         "Ratings": circles
     };
 
-    // Creating map object
-    var myMap = L.map("viz-2", {
-        center: [38.8026, -116.4194],
-        zoom: 6,
-        layers: [streetmap, circles]
-    });
-
-    // Creating a layer control, passing in the baseMaps and overlayMaps. Adding the layer control to the map
+    // Creating layer control, passing in baseMaps and overlayMaps
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
@@ -60,7 +83,7 @@ function createMap(circles) {
         var div = L.DomUtil.create('div', 'info legend');
         var star_rating = [0, 1.0, 2.0, 3.0, 4.0];
 
-        var legendHeader = '<h6><b>Rating Score<br></h6></b><hr>'
+        var legendHeader = '<h6><b>Rating Score<br>by Stars<br></h6></b><hr>'
         div.innerHTML = legendHeader;
 
         for (var i = 0; i < star_rating.length; i++) {
@@ -73,23 +96,12 @@ function createMap(circles) {
 
     // Adding legend to map
     legend.addTo(myMap);
-}
 
 
-// // Calling createMap function to render map
-// createMap(circles);
+    function createLayer() {
 
-
-// Step 3: Reading the data using D3
-// ------------------------------------------------------
-var yelpData = "/data";
-
-// Updating the map upon dropdown selection
-d3.select("#inputGroupSelect04").on("change", updateMap);
-
-function updateMap() {
-
-    d3.json(yelpData, function (data) {
+        // Removing layer or circles after new selection of category
+        myMap.removeLayer(circles);
 
         // Dropdown menu selection
         var dropdownMenu = d3.select("#inputGroupSelect04");
@@ -102,7 +114,7 @@ function updateMap() {
 
         // Looping through the data to later make circles and bind pop-ups for category selected
         for (var i = 0; i < data.length; i++) {
-            var categories = data[i].categories;
+            // var categories = data[i].categories;
             var businessName = data[i].name;
             var address = data[i].address;
             var city = data[i].city;
@@ -113,23 +125,21 @@ function updateMap() {
             var lat = data[i].latitude;
             var lng = data[i].longitude;
 
+
             // If statement, to search and create pop-ups dependent on dropdownMenu selection
-            if (categories.includes(category)) {
-                console.log(categories);
-                console.log(lat);
-                console.log(lng);
+            if (data[i].categories.includes(category)) {
 
                 // For each (lat, lng), create a marker and bind a popup w/ business info
-                var circleMarker = L.marker([lat, lng], {
+                var circleMarker = L.circle([lat, lng], {
                     radius: markerSize(ratings),
                     fillColor: getColor(ratings),
                     fillOpacity: 0.8,
                     stroke: true,
                     color: 'black',
-                    weight: 0.25
-                }).bindPopup("<h6><b>Place: " + businessName + "<br></b><hr>" +
-                    "Address: " + address + " " + city + " " + state + " " + zipCode + "</h6><br>" +
-                    "<p>Categories: " + categories + "<br>" +
+                    weight: 0.5
+                }).bindPopup("<h6><b>Place: " + businessName + "<br></b></h6><hr>" +
+                    "<p>Address: " + address + " " + city + ", " + state + ", " + zipCode + "<br>" +
+                    "Categories: " + category + "<br>" +
                     "No. Reviews: " + reviews + "<br>" +
                     "Star Rating: " + ratings + "</p>");
 
@@ -139,9 +149,6 @@ function updateMap() {
         }
 
         // Creating a layer group made from the circleMarkers array, passing it into the createMap function
-        createMap(L.layerGroup(circleMarkers));
-    })
-};
-
-// Calling updateMap function to render updates to map
-updateMap();
+        circles = L.layerGroup(circleMarkers).addTo(myMap);
+    }
+})
