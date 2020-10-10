@@ -23,8 +23,8 @@ var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z
 
 // Step 1: Setting up the size and colors for the circles
 // ------------------------------------------------------
-function markerSize(ratings) {
-    return ratings * 250
+function markerSize(reviews) {
+    return reviews * 0.1
 }
 
 // Creating the color scale for the ratings
@@ -34,7 +34,7 @@ function getColor(d) {
            d >= 3.0 ? '#663399' :
            d >= 2.0 ? '#6A5ACD' :
            d >= 1.0 ? '#9370DB' :
-                        '#FFA07A';
+                       '#FFA07A';
 }
 
 
@@ -54,9 +54,9 @@ d3.json(yelpData, function (data) {
     var circles = L.layerGroup();
 
     // Creating map object
-    var myMap = L.map("viz-1", {
+    var myMap = L.map("viz-5", {
         center: [36.1699, -115.1398],
-        zoom: 10,
+        zoom: 12,
         layers: [lightmap, circles]
     });
 
@@ -66,14 +66,10 @@ d3.json(yelpData, function (data) {
         "Dark Map View": darkmap
     };
 
-    // Creating an overlayMaps object to hold the circles layer
-    var overlayMaps = {
-        "Ratings": circles
-    };
 
     // Creating layer control, passing in baseMaps and overlayMaps
-    L.control.layers(baseMaps, overlayMaps, {
-        collapsed: false
+    L.control.layers(baseMaps, null, {
+        collapsed: true
     }).addTo(myMap);
 
     // Creating legend
@@ -131,7 +127,7 @@ d3.json(yelpData, function (data) {
 
                 // For each (lat, lng), create a marker and bind a popup w/ business info
                 var circleMarker = L.circle([lat, lng], {
-                    radius: markerSize(ratings),
+                    radius: markerSize(reviews),
                     fillColor: getColor(ratings),
                     fillOpacity: 0.8,
                     stroke: true,

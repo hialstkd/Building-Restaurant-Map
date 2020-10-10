@@ -49,31 +49,24 @@
         </div>
             
 
+    <!--Button row-->
+    <div class="row justify-content-md-center">
+        <a type="button" class="btn btn-secondary btn-lg" href="/map">Switch to Map View</a>
+    </div>
+
     <!--Viz Row-->
     <div class="row" id="viz-row">
         
         <!--Visual 1 MAP-->
         <div class="col-md-6" id="viz-1">
-            <h2>Markers Map</h2>
+            <canvas id="Bar"></canvas>
         </div>
         
         <!--Visual 2 BAR CHART-->
-        <div class="col-md-6" id="viz-3">
-            <h2>Bar Chart</h2>
-            <canvas id="Bar"></canvas>
-        </div>
-
-    </div>
-    
-    <!--Viz Row 2-->
-    <div class="row justify-content-md-center" id="viz-row-2">  
-
-        <!--Visual 4-->
-        <div class="col-md-6" id="viz-4">
-            <h2>Donut Chart</h2>
+        <div class="col-md-6" id="viz-2">
             <canvas id="Doughnut"></canvas>
         </div>
-    
+
     </div>
 
     <!--Leaflet JS -->
@@ -92,14 +85,8 @@
     <!-- API key -->
     <script type="text/javascript" src="../static/js/config.js"></script>
     
-    <!-- Our JavaScript -->
+    <!-- Bar Chart JavaScript -->
     <script type="text/javascript" src="../static/js/app.js"></script>
-    
-    <!--Minerva Choropleth-->
-    <script type="text/javascript" src="../static/js/logic_leaflet.js"></script>
-    
-    <!--Tony Marker-->
-    <script type="text/javascript" src="../static/js/logic_marker.js"></script>
         
 </body>
 </html>
