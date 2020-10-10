@@ -9,7 +9,7 @@ We remembered the original question posed to us at the beginning of this bootcam
 
 Ultimately, we used ETL procedures to take the Yelp Data and push it into our local MongoDB database. Afterwards, we used Python Flask to load the data from MongoDB to a locally hosted server on a "/data" endpoint in a JSON format. Once this was accomplished, we were able to create a few visualizations. 
 
-The first visualization we created was a map that has two layers which the user can choose between to see the number of stars a restaurant has based on circle color and size or the location of the restaurant as a marker with more information about the restaurant upon clicking the marker. 
+The first visualization we created was a map that has circle markers. The circle markers size is based on the number of reviews and color is based on the number of stars. Clicking on the markers will reveal more information about the restaurant.
 
 A static doughnut chart also appears that has the total number of each type of restaurant so the user is able to see the diversity between types. The doughnut chart is interactive in that if a label on the legend is clicked, it can be enabled/disabled.
 
