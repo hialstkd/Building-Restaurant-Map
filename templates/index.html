@@ -11,48 +11,45 @@
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin="" />
 
-    <!-- Chart.js CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
-    integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w=="
-    crossorigin="anonymous" />
-
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <!-- Local CSS file -->
+    <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 
 </head>
 
 <body>
+    
+    
     <div class="container-fluid">
+
         <!--Header Row-->
         <div class="jumbotron">
-            <h1 class="display-4">Arizona's Best According to Yelp</h1>
+            <h1 class="display-4">Nevada's Best According to Yelp</h1>
             <p class="lead">Once we have all three visuals loaded, we'll add a short and sweet explanation here.</p>
             <span class="lead"><a id="github-link" href="https://github.com/drewpgilmore/group-project-2" target="_blank">Check out our code on GitHub</a></span>
-        </div> 
-                
-        <!--Input row-->
-        <div class="row" id="input-row">
-            <div class="input-group">
-                <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                  <option selected>Choose a category...</option>
-                  <option>American</option>
-                  <option>Chinese</option>
-                  <option>Italian</option>
-                  <option>Mexican</option>
-                  <option>Japanese</option>
-                  <option>Thai</option>
-                  <option>Filipino</option>
-                  <option>Indian</option>
-                  <option>Korean</option>
-                  <option>French</option>
-                  <option>Mediterranean</option>
-                </select>
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" id="search-button">Search!</button>
-                </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                        <option selected>Choose a category...</option>
+                        <option>American</option>
+                        <option>Chinese</option>
+                        <option>Italian</option>
+                        <option>Mexican</option>
+                        <option>Japanese</option>
+                        <option>Thai</option>
+                        <option>Filipino</option>
+                        <option>Indian</option>
+                        <option>Korean</option>
+                        <option>French</option>
+                        <option>Mediterranean</option>
+                      </select>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="search-button">Search!</button>
+                    </div>
+                  </div>
             </div>
         </div>
             
@@ -60,31 +57,26 @@
         <!--Viz Row-->
         <div class="row" id="viz-row">
             <!--Visual 1-->
-            <div class="col-md-6" id="viz-1">
-                <h2>Markers Map</h2>
+            <div class="col-md-4" id="viz-1">
+                <h2>Visual 1 - Map</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque aliquid minus suscipit amet commodi deserunt, officia tenetur aperiam magni molestiae consectetur asperiores nobis, est vero nam aliquam iusto, porro placeat?</p>
             </div>
 
             <!--Visual 2-->
-            <div class="col-md-6" id="viz-2">
+            <div class="col-md-4" id="viz-2">
                 <h2>Reviews by ZIP Code</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione eveniet officia et aperiam quod ea veniam quae corporis. Facere sunt ad reiciendis earum corrupti asperiores architecto. Odit optio commodi veritatis.</p>
             </div>
-        </div>
-
-        <div class="row" id="viz-row-2">  
             <!--Visual 3-->
-            <div class="col-md-6" id="viz-3">
-                <h2>Bar Chart</h2>
-                <canvas id="Chart"></canvas>
-            </div>
-
-            <!--Visual 4-->
-            <div class="col-md-6" id="viz-4">
-                <h2>Donut Chart Chart</h2>
+            <div class="col-md-4" id="viz-3">
+                <h2>Visual 3 - TBD</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione eveniet officia et aperiam quod ea veniam quae corporis. Facere sunt ad reiciendis earum corrupti asperiores architecto. Odit optio commodi veritatis.</p>
             </div>
         </div>
 
     </div>
 
+<<<<<<< HEAD
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
@@ -108,5 +100,28 @@
 
 =======
 >>>>>>> f9c37ad5535da347ac16fdf3b3ebc19a003adc8b
+=======
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+        <!-- D3 JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+
+        <!-- API key -->
+        <script type="text/javascript" src="../static/js/config.js"></script>
+
+        <!-- Our JavaScript -->
+        <script type="text/javascript" src="../static/js/app.js"></script>
+
+        <!--Minerva Leaflet-->
+        <script type="text/javascript" src="../static/js/logic_leaflet.js"></script>
+        
+
+
+
+
+>>>>>>> minervas_branch
 </body>
 </html>
