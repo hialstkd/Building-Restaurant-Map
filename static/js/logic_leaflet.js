@@ -23,8 +23,8 @@ var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z
 
 // Step 1: Setting up the size and colors for the circles
 // ------------------------------------------------------
-function markerSize(ratings) {
-    return ratings * 250
+function markerSize(reviews) {
+    return reviews * 0.1
 }
 
 // Creating the color scale for the ratings
@@ -34,7 +34,7 @@ function getColor(d) {
            d >= 3.0 ? '#663399' :
            d >= 2.0 ? '#6A5ACD' :
            d >= 1.0 ? '#9370DB' :
-                        '#FFA07A';
+                       '#FFA07A';
 }
 
 
@@ -66,14 +66,9 @@ d3.json(yelpData, function (data) {
         "Dark Map View": darkmap
     };
 
-    // Creating an overlayMaps object to hold the circles layer
-    var overlayMaps = {
-        "Ratings": circles
-    };
-
     // Creating layer control, passing in baseMaps and overlayMaps
-    L.control.layers(baseMaps, overlayMaps, {
-        collapsed: false
+    L.control.layers(baseMaps, null, {
+        collapsed: true
     }).addTo(myMap);
 
     // Creating legend
@@ -83,12 +78,12 @@ d3.json(yelpData, function (data) {
         var div = L.DomUtil.create('div', 'info legend');
         var star_rating = [0, 1.0, 2.0, 3.0, 4.0];
 
-        var legendHeader = '<h6><b>Rating Score<br>by Stars<br></h6></b><hr>'
+        var legendHeader = 'Circle Size:<br>Number of Reviews<hr>'
         div.innerHTML = legendHeader;
 
         for (var i = 0; i < star_rating.length; i++) {
             div.innerHTML +=
-                '<i style="background:' + getColor(star_rating[i] + 1) + '"></i> ' + star_rating[i] + (star_rating[i + 1] ? ' - ' + star_rating[i + 1] + '<br>' : ' + ');
+                '<i style="background:' + getColor(star_rating[i] + 1) + '"></i> ' + star_rating[i] + (star_rating[i + 1] ? ' - ' + star_rating[i + 1] + '<br>' : ' + stars');
         };
 
         return div;
@@ -131,7 +126,7 @@ d3.json(yelpData, function (data) {
 
                 // For each (lat, lng), create a marker and bind a popup w/ business info
                 var circleMarker = L.circle([lat, lng], {
-                    radius: markerSize(ratings),
+                    radius: markerSize(reviews),
                     fillColor: getColor(ratings),
                     fillOpacity: 0.8,
                     stroke: true,
