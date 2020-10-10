@@ -1,33 +1,25 @@
 // --- Creating the Leaflet Map ---
 
 
-// Defining layers
+// Step 1: Defining layers
+// -----------------------
 var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     tileSize: 512,
-    // maxZoom: 18,
+    maxZoom: 18,
     zoomOffset: -1,
     id: "light-v10",
     accessToken: API_KEY
 });
 
-var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-    tileSize: 512,
-    // maxZoom: 18,
-    zoomOffset: -1,
-    id: "dark-v10",
-    accessToken: API_KEY
-});
 
-
-// Step 1: Setting up the size and colors for the circles
-// ------------------------------------------------------
+// Step 2: Setting up the size for the circles 
+// (size based on # of reviews; color based on star ratings)
+// ---------------------------------------------------------
 function markerSize(reviews) {
     return reviews * 0.1
 }
 
-// Creating the color scale for the ratings
 function getColor(d) {
     return d >= 5.0 ? '#8B008B' :
            d >= 4.0 ? '#483D8B' :
@@ -39,18 +31,19 @@ function getColor(d) {
 
 
 // Step 3: Reading the data using D3
-// ------------------------------------------------------
+// ---------------------------------
 var yelpData = "/data";
 
 d3.json(yelpData, function (data) {
 
-    // Updating the map upon dropdown selection
+    // Step 4: Updating the map upon dropdown selection
+    // ------------------------------------------------
     d3.select("#inputGroupSelect04").on("change", createLayer);
 
-    // Dropdown menu selection
     var dropdownMenu = d3.select("#inputGroupSelect04");
     var category = dropdownMenu.property("value");
 
+    // Creating a circles layer group
     var circles = L.layerGroup();
 
     // Creating map object
@@ -59,17 +52,6 @@ d3.json(yelpData, function (data) {
         zoom: 12,
         layers: [lightmap, circles]
     });
-
-    // Creating a baseMaps object to hold the lightmap layer
-    var baseMaps = {
-        "Light Map View": lightmap,
-        "Dark Map View": darkmap
-    };
-
-    // Creating layer control, passing in baseMaps and overlayMaps
-    L.control.layers(baseMaps, null, {
-        collapsed: true
-    }).addTo(myMap);
 
     // Creating legend
     var legend = L.control({ position: 'topright' });
@@ -93,6 +75,8 @@ d3.json(yelpData, function (data) {
     legend.addTo(myMap);
 
 
+    // Step 5: Building a function for the layer of circles 
+    // -----------------------------------------------------
     function createLayer() {
 
         // Removing layer or circles after new selection of category
@@ -102,12 +86,12 @@ d3.json(yelpData, function (data) {
         var dropdownMenu = d3.select("#inputGroupSelect04");
         var category = dropdownMenu.property("value");
 
-        console.log(category);
-
         // Initializing an array to hold circleMarkers
         var circleMarkers = [];
 
-        // Looping through the data to later make circles and bind pop-ups for category selected
+
+        // Step 6: Looping through the data to later make circles and bind pop-ups for category selected
+        // ---------------------------------------------------------------------------------------------
         for (var i = 0; i < data.length; i++) {
             // var categories = data[i].categories;
             var businessName = data[i].name;
@@ -121,10 +105,12 @@ d3.json(yelpData, function (data) {
             var lng = data[i].longitude;
 
 
-            // If statement, to search and create pop-ups dependent on dropdownMenu selection
+            // Step 7: If statement, to search and create pop-ups dependent on dropdownMenu selection
+            // --------------------------------------------------------------------------------------
             if (data[i].categories.includes(category)) {
 
-                // For each (lat, lng), create a marker and bind a popup w/ business info
+                // Step 8: For each (lat, lng), create a marker and bind a popup w/ business info
+                // ------------------------------------------------------------------------------
                 var circleMarker = L.circle([lat, lng], {
                     radius: markerSize(reviews),
                     fillColor: getColor(ratings),
@@ -138,12 +124,16 @@ d3.json(yelpData, function (data) {
                     "No. Reviews: " + reviews + "<br>" +
                     "Star Rating: " + ratings + "</p>");
 
-                // Adding the marker to the circleMarkers array
+
+                // Step 9: Adding the marker to the circleMarkers array
+                // ----------------------------------------------------
                 circleMarkers.push(circleMarker);
             }
         }
 
-        // Creating a layer group made from the circleMarkers array, passing it into the createMap function
+        
+        // Step 10: Creating a layer group made from the circleMarkers array, passing it into the createMap function
+        // ---------------------------------------------------------------------------------------------------------
         circles = L.layerGroup(circleMarkers).addTo(myMap);
     }
 })
