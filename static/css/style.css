@@ -1,3 +1,7 @@
+.container-fluid {
+  padding: 0 0 0 0;
+}
+
 .jumbotron {
   height: 275px;
   margin: 20px 50px 20px 50px;
@@ -46,6 +50,7 @@ body,
 html {
   height: 100%;
 }
+
 .legend {
   line-height: 20px;
   color: darkslategray;
