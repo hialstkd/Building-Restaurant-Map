@@ -9,21 +9,19 @@
 .display-4 { font-weight: bold; }
 #github-link { font-weight: light;}
 
-
 .input-group { 
     width: 800px;
     align-content: center;
 }
 
-
-#viz-row, #input-row {
+#viz-row, #viz-row-2, #input-row {
     margin: 20px 50px 20px 50px;
 }
 
-#viz-row
-.col-md-4 {
+.col-md-6 {
     height: 500px;
     border: 2px dashed red;
+    text-align: center;
 }
 
 canvas {
