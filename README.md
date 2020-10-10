@@ -1,7 +1,7 @@
 # Project 2
 
 ## Topic: 
-Building an interface that allows users to see the restaurants of their choosing, by type of food, using Yelp API, HTML, CSS, JS, Chart.js library, MongoDB, Python-Flask, Leaflet, and Mapbox.
+Building an interface that allows users to see the restaurants of their choosing, by type of food, using Yelp API, Bootstrap, HTML, CSS, JS, Chart.js library, MongoDB, Python-Flask, Leaflet, and Mapbox.
 
 ## Articulation :pizza: vs. :taco:
 
@@ -32,6 +32,7 @@ Originally we were going to allow the user to choose any city in the U.S. and se
 * [MongoDB](https://www.mongodb.com/)
 * [Chart.js](https://www.chartjs.org/)
 * [Leaflet](https://leafletjs.com/)
+* [Bootstrap](https://getbootstrap.com/)
 
 ## Screenshots:
 
