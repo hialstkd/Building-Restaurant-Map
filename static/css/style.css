@@ -71,3 +71,7 @@ html {
   margin: 0 0 10px;
   color: darkslategray;
 }
+
+#viz-5 {
+  height: 500px;
+}
