@@ -13,7 +13,7 @@ def home():
     return render_template('index.html')
 
 @app.route('/map')
-def home():
+def map():
     return render_template('map.html')
 
 @app.route('/data', methods = ['GET'])
