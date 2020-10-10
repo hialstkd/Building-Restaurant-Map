@@ -1,3 +1,7 @@
+.container-fluid {
+  padding: 0;
+}
+
 .jumbotron {
   height: 275px;
   margin: 20px 50px 20px 50px;
@@ -33,19 +37,19 @@ canvas {
   right: 0;
 }
 
-body {
+/* body {
   padding: 0;
   margin: 0;
-}
+} */
 
 /* #viz-1 {
     height: 180px;
 } */
 
-body,
+/* body,
 html {
   height: 100%;
-}
+} */
 .legend {
   line-height: 20px;
   color: darkslategray;
