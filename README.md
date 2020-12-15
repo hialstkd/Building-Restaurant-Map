@@ -36,3 +36,5 @@ Originally we were going to allow the user to choose any city in the U.S. and se
 
 ## Screenshots:
 
+![](Screenshot/Main_Page.PNG)
+![](Screenshot/Map_Page.PNG)
